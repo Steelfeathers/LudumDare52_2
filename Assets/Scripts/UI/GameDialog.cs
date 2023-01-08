@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using FirebirdGames.Utilities;
+using FirebirdGames.Utilities.UI;
 using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -34,15 +35,13 @@ namespace LudumDare52_2
         }; 
     }
 
-    public class GameDialog : MonoBehaviour
+    public class GameDialog : Dialog
     {
         [Header("UI")]
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private TextMeshProUGUI scoreText;
         [SerializeField] private Transform lifeWidgetHolder;
         [SerializeField] private LifeWidget lifeWidgetPrefab;
-        [SerializeField] private GameObject testVictoryScreen;
-        [SerializeField] private GameObject testGameOverScreen;
 
         [Header("Field")] 
         [SerializeField] private Transform tractorHolder;
@@ -234,7 +233,7 @@ namespace LudumDare52_2
                     if (victoryTimer <= 0)
                     {
                         isDone = true;
-                        testVictoryScreen.SetActive(true);
+                        UIManager.Instance.ShowOverlayDialog(MyGameRoot.Instance.GameVictoryDialogPrefab);
                     }
                     else
                     {
@@ -326,7 +325,7 @@ namespace LudumDare52_2
             else
             {
                 isDone = true;
-                testGameOverScreen.SetActive(true);
+                UIManager.Instance.ShowOverlayDialog(MyGameRoot.Instance.GameLossDialogPrefab);
             }
         }
         
