@@ -5,7 +5,9 @@ using System.Linq;
 using FirebirdGames.Utilities;
 using FirebirdGames.Utilities.UI;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace LudumDare52_2
@@ -47,27 +49,16 @@ namespace LudumDare52_2
         [SerializeField] private Transform tractorHolder;
         [SerializeField] private RectTransform pickupTrigger;
         [SerializeField] private RectTransform endLevelTrigger;
-        //[SerializeField] private float tractorDamageCooldown = 3f;
         [SerializeField] private Transform cropRowsHolder;
-        //[SerializeField] private float cropRowsMoveSpeed = 0.2f;
-        [SerializeField] private List<Transform> cropRowSlots;
-
-        //[Space] [Header("Crops")] 
-        //[SerializeField] private List<Crop> cropPrefabs;
-        //[SerializeField] private List<float> cropPrefabWeights;
-        
-        //[Space][Header("Obstacles")]
-        //[SerializeField] private List<Obstacle> obstaclePrefabs;
-        //[SerializeField] private List<float> obstaclePrefabWeights;
-
-        //[Space] [Header("Difficulty")] 
-        //[SerializeField] private int maxLives;
-        //[SerializeField] private List<float> wordListWeights;
+        [SerializeField] private GameObject cropSlotPrefab;
+        [SerializeField] private List<Transform> cropRows;
+        //[SerializeField] private List<Transform> cropRowSlots;
 
         private List<LifeWidget> lifeWidgets = new List<LifeWidget>();
       
         private List<Crop> crops = new List<Crop>();
         private List<Obstacle> obstacles = new List<Obstacle>();
+        private List<Vector2> obstacleGridPositions = new List<Vector2>();
 
         private List<string[]> wordArrayList = new List<string[]>();
 
@@ -116,32 +107,52 @@ namespace LudumDare52_2
             //Setup score display
             MyGameRoot.Instance.CurScore = 0;
             UpdateScore();
-            
-            foreach (var slot in cropRowSlots)
+
+            int obstColCount = 0;
+            for (int x = 0; x < curLevelSettings.LevelLength; x++) //down first, then across, in 'waves'
             {
-                //Spawn *something*
-                if (Random.Range(0f, 1f) < 0.5f) //TODO Perlin spawning
+                obstColCount = 0;
+                for (int y = 0; y < cropRows.Count; y++)
                 {
-                    //spawn obstacle
-                    if (Random.Range(0f, 1f) < 0.25f)
+                    var slot = GameObject.Instantiate(cropSlotPrefab, cropRows[y]); //spawn placeholder to make sure everything sizes correctly
+                    
+                    //Spawn *something*
+                    if (Random.Range(0f, 1f) < curLevelSettings.GeneralSpawnChance) 
                     {
-                        var wordList = wordArrayList.GetWeightedRandom(curLevelSettings.WordListWeights).ToList();
+                        //If there was already an obstacle spawned right next to this one, reduce the chance of spawning again
+                        bool obstLeft = obstacleGridPositions.Contains(new Vector2(x - 1, y));
+                        bool obstUp = obstacleGridPositions.Contains(new Vector2(x, y - 1));
+                        float calcedSpawnChance = obstLeft || obstUp
+                            ? curLevelSettings.ObstacleSpawnChance * 0.5f
+                            : curLevelSettings.ObstacleSpawnChance;
                         
-                        var obstaclePrefab = curLevelSettings.ObstaclePrefabs.GetWeightedRandom(curLevelSettings.ObstaclePrefabWeights);
-                        var obstacle = GameObject.Instantiate(obstaclePrefab.gameObject, slot).GetComponent<Obstacle>();
-                        obstacle.Setup(wordList.GetRandom());
-                        obstacles.Add(obstacle);
-                    }
-                    //spawn crop
-                    else
-                    {
-                        var cropPrefab = curLevelSettings.CropPrefabs.GetWeightedRandom(curLevelSettings.CropPrefabWeights);
-                        var crop = GameObject.Instantiate(cropPrefab.gameObject, slot).GetComponent<Crop>();
-                        crop.gameObject.SetActive(true);
-                        crops.Add(crop);
+                        //spawn obstacle
+                        if (obstColCount < curLevelSettings.MaxObstaclesPerCol && Random.Range(0f, 1f) < calcedSpawnChance)
+                        {
+                            var wordList = wordArrayList.GetWeightedRandom(curLevelSettings.WordListWeights)
+                                .ToList();
+
+                            var obstaclePrefab = curLevelSettings.ObstaclePrefabs.GetWeightedRandom(curLevelSettings.ObstaclePrefabWeights);
+                            var obstacle = GameObject.Instantiate(obstaclePrefab.gameObject, slot.transform).GetComponent<Obstacle>();
+                            obstacle.Setup(wordList.GetRandom());
+                            obstacles.Add(obstacle);
+
+                            obstacleGridPositions.Add(new Vector2(x, y));
+                            obstColCount += 1;
+                        }
+                        //spawn crop
+                        else
+                        {
+                            var cropPrefab = curLevelSettings.CropPrefabs.GetWeightedRandom(curLevelSettings.CropPrefabWeights);
+                            var crop = GameObject.Instantiate(cropPrefab.gameObject, slot.transform).GetComponent<Crop>();
+                            crop.gameObject.SetActive(true);
+                            crops.Add(crop);
+                        }
                     }
                 }
             }
+            
+            LayoutRebuilder.ForceRebuildLayoutImmediate(cropRowsHolder.gameObject.RectTransform());
         }
 
         public void OnInputDeselect()

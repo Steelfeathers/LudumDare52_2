@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: DifficultySettings_lvl0
   m_EditorClassIdentifier: 
   maxLives: 3
-  cropRowsMoveSpeed: 0.5
+  tractorMoveSpeed: 1
   tractorDamageCooldown: 1.5
   obstacleSpawnChance: 0.25
   maxObstaclesOnScreen: 3

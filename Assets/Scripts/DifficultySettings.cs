@@ -8,10 +8,12 @@ namespace LudumDare52_2
     public class DifficultySettings : ScriptableObject
     {
         [SerializeField] private int maxLives;
+        [SerializeField] private int levelLength = 20;
         [SerializeField] private float tractorMoveSpeed = 0.5f;
         [SerializeField] private float tractorDamageCooldown = 3f;
+        [SerializeField] private float generalSpawnChance = 0.5f;
         [SerializeField] private float obstacleSpawnChance = 0.25f;
-        [SerializeField] private int maxObstaclesOnScreen = 5;
+        [SerializeField] private int maxObstaclesPerCol = 3;
         [SerializeField] private List<float> wordListWeights;
         
         [Space] [Header("Crops")] 
@@ -22,11 +24,13 @@ namespace LudumDare52_2
         [SerializeField] private List<Obstacle> obstaclePrefabs;
         [SerializeField] private List<float> obstaclePrefabWeights;
 
+        public int LevelLength => levelLength;
         public int MaxLives => maxLives;
         public float TractorMoveSpeed => tractorMoveSpeed;
         public float TractorDamageCooldown => tractorDamageCooldown;
-        public float ObstacleSpawnChange => obstacleSpawnChance;
-        public int MaxObstaclesOnScreen => maxObstaclesOnScreen;
+        public float GeneralSpawnChance => generalSpawnChance;
+        public float ObstacleSpawnChance => obstacleSpawnChance;
+        public int MaxObstaclesPerCol => maxObstaclesPerCol;
         public List<float> WordListWeights => wordListWeights;
         public List<Crop> CropPrefabs => cropPrefabs;
         public List<float> CropPrefabWeights => cropPrefabWeights;

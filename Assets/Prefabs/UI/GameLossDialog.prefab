@@ -760,6 +760,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 55468452010600690}
     m_Modifications:
+    - target: {fileID: 920493364082028975, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 920493364082028975, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 920493364082028975, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3368659549261542767}
+    - target: {fileID: 920493364082028975, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 920493364082028975, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnRetry
+      objectReference: {fileID: 0}
+    - target: {fileID: 920493364082028975, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LudumDare52_2.GameOverDialog, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 920493364082028975, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2342823407257010478, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -871,6 +899,34 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 55468452010600690}
     m_Modifications:
+    - target: {fileID: 920493364082028975, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 920493364082028975, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 920493364082028975, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 3368659549261542767}
+    - target: {fileID: 920493364082028975, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 920493364082028975, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnReturnToMenu
+      objectReference: {fileID: 0}
+    - target: {fileID: 920493364082028975, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: LudumDare52_2.GameOverDialog, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 920493364082028975, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2342823407257010478, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
