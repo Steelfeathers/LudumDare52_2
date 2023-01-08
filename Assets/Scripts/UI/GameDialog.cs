@@ -47,22 +47,22 @@ namespace LudumDare52_2
         [SerializeField] private Transform tractorHolder;
         [SerializeField] private RectTransform pickupTrigger;
         [SerializeField] private RectTransform endLevelTrigger;
-        [SerializeField] private float tractorDamageCooldown = 3f;
+        //[SerializeField] private float tractorDamageCooldown = 3f;
         [SerializeField] private Transform cropRowsHolder;
-        [SerializeField] private float cropRowsMoveSpeed = 0.2f;
+        //[SerializeField] private float cropRowsMoveSpeed = 0.2f;
         [SerializeField] private List<Transform> cropRowSlots;
 
-        [Space] [Header("Crops")] 
-        [SerializeField] private List<Crop> cropPrefabs;
-        [SerializeField] private List<float> cropPrefabWeights;
+        //[Space] [Header("Crops")] 
+        //[SerializeField] private List<Crop> cropPrefabs;
+        //[SerializeField] private List<float> cropPrefabWeights;
         
-        [Space][Header("Obstacles")]
-        [SerializeField] private List<Obstacle> obstaclePrefabs;
-        [SerializeField] private List<float> obstaclePrefabWeights;
+        //[Space][Header("Obstacles")]
+        //[SerializeField] private List<Obstacle> obstaclePrefabs;
+        //[SerializeField] private List<float> obstaclePrefabWeights;
 
-        [Space] [Header("Difficulty")] 
-        [SerializeField] private int maxLives;
-        [SerializeField] private List<float> wordListWeights;
+        //[Space] [Header("Difficulty")] 
+        //[SerializeField] private int maxLives;
+        //[SerializeField] private List<float> wordListWeights;
 
         private List<LifeWidget> lifeWidgets = new List<LifeWidget>();
       
@@ -71,12 +71,13 @@ namespace LudumDare52_2
 
         private List<string[]> wordArrayList = new List<string[]>();
 
+        private DifficultySettings curLevelSettings;
+        
         private Obstacle curObstacle;
         private string curInput;
         private string prevInput;
 
         private int curLives;
-        private int curScore;
         private float tractorDamagedTimer;
 
         private bool isDone;
@@ -96,21 +97,25 @@ namespace LudumDare52_2
                 WordDictionary.SEVEN_LETTER_WORDS
             };
 
-            SetupLevel(); //TODO Difficulty
+            SetupLevel(); 
         }
 
         public void SetupLevel()
         {
+            //fetch the difficulty settings
+            curLevelSettings = MyGameRoot.Instance.LevelDifficultySettings[MyGameRoot.Instance.CurLevel];
+            
             //Setup lives display
-            curLives = maxLives;
-            for (int i = 0; i < maxLives; i++)
+            curLives = curLevelSettings.MaxLives;
+            for (int i = 0; i < curLives; i++)
             {
                 var lifeWidget = GameObject.Instantiate(lifeWidgetPrefab, lifeWidgetHolder).GetComponent<LifeWidget>();
                 lifeWidgets.Add(lifeWidget);
             }
             
             //Setup score display
-            scoreText.text = "Score: 0";
+            MyGameRoot.Instance.CurScore = 0;
+            UpdateScore();
             
             foreach (var slot in cropRowSlots)
             {
@@ -120,9 +125,9 @@ namespace LudumDare52_2
                     //spawn obstacle
                     if (Random.Range(0f, 1f) < 0.25f)
                     {
-                        var wordList = wordArrayList.GetWeightedRandom(wordListWeights).ToList();
+                        var wordList = wordArrayList.GetWeightedRandom(curLevelSettings.WordListWeights).ToList();
                         
-                        var obstaclePrefab = obstaclePrefabs.GetWeightedRandom(obstaclePrefabWeights);
+                        var obstaclePrefab = curLevelSettings.ObstaclePrefabs.GetWeightedRandom(curLevelSettings.ObstaclePrefabWeights);
                         var obstacle = GameObject.Instantiate(obstaclePrefab.gameObject, slot).GetComponent<Obstacle>();
                         obstacle.Setup(wordList.GetRandom());
                         obstacles.Add(obstacle);
@@ -130,7 +135,7 @@ namespace LudumDare52_2
                     //spawn crop
                     else
                     {
-                        var cropPrefab = cropPrefabs.GetWeightedRandom(cropPrefabWeights);
+                        var cropPrefab = curLevelSettings.CropPrefabs.GetWeightedRandom(curLevelSettings.CropPrefabWeights);
                         var crop = GameObject.Instantiate(cropPrefab.gameObject, slot).GetComponent<Crop>();
                         crop.gameObject.SetActive(true);
                         crops.Add(crop);
@@ -206,10 +211,10 @@ namespace LudumDare52_2
             
         }
 
-        private void UpdateScore(int amt)
+        private void UpdateScore(int amt=0)
         {
-            curScore += amt;
-            scoreText.text = $"Score: {curScore}";
+            MyGameRoot.Instance.CurScore += amt;
+            scoreText.text = $"Score: {MyGameRoot.Instance.CurScore}";
         }
 
         private void Update()
@@ -237,7 +242,7 @@ namespace LudumDare52_2
                     }
                     else
                     {
-                        tractorHolder.transform.position = new Vector3(tractorHolder.transform.position.x + (Time.deltaTime * cropRowsMoveSpeed), tractorHolder.transform.position.y, tractorHolder.transform.position.z);
+                        tractorHolder.transform.position = new Vector3(tractorHolder.transform.position.x + (Time.deltaTime * curLevelSettings.TractorMoveSpeed), tractorHolder.transform.position.y, tractorHolder.transform.position.z);
                     }
                 }
                 return;
@@ -254,7 +259,7 @@ namespace LudumDare52_2
             }
             
             //Move all the crops across the screen
-            float moveAmt = cropRowsMoveSpeed * Time.deltaTime;
+            float moveAmt = curLevelSettings.TractorMoveSpeed * Time.deltaTime;
             cropRowsHolder.transform.position = new Vector3(cropRowsHolder.position.x - moveAmt, cropRowsHolder.position.y, cropRowsHolder.position.z);
 
             //Harvest crops and add to score if past the pickup point
@@ -301,14 +306,14 @@ namespace LudumDare52_2
             curLives -= 1;
             if (curLives < 0) curLives = 0;
             
-            for (int i = maxLives - 1; i >= curLives; i--)
+            for (int i = curLevelSettings.MaxLives - 1; i >= curLives; i--)
             {
                 lifeWidgets[i].SetFull(false);
             }
 
             if (curLives <= 0)
             {
-              //  EndGame(false);
+                EndGame(false);
             }
         }
 

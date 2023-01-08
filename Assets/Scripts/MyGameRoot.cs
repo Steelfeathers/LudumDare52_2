@@ -14,10 +14,15 @@ namespace LudumDare52_2
         [SerializeField] private Dialog gameLossDialogPrefab;
         [SerializeField] private Dialog tutorialPrefab;
 
+        [SerializeField] private List<DifficultySettings> levelDifficultySettings;
+        public List<DifficultySettings> LevelDifficultySettings => levelDifficultySettings;
+
         public Dialog GameVictoryDialogPrefab => gameVictoryDialogPrefab;
         public Dialog GameLossDialogPrefab => gameLossDialogPrefab;
 
-        public int CurLevel;
+        public int MaxLevel => levelDifficultySettings.Count - 1;
+        [HideInInspector] public int CurLevel;
+        [HideInInspector] public int CurScore;
         
         private Dialog gameDialog;
 
