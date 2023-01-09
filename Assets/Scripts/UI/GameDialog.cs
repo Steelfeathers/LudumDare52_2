@@ -341,7 +341,7 @@ namespace LudumDare52_2
 
             if (curLives <= 0)
             {
-                //EndGame(false);
+                EndGame(false);
             }
         }
 

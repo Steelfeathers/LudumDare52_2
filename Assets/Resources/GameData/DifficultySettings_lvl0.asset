@@ -30,7 +30,9 @@ MonoBehaviour:
   - 0
   cropPrefabs:
   - {fileID: 5448868706150218653, guid: 86147cad74d36294cae4d5c1eda38d91, type: 3}
+  - {fileID: 5448868706150218653, guid: 6cd5f2c2bf7152e429cc1c9a207dd187, type: 3}
   cropPrefabWeights:
+  - 1
   - 1
   obstaclePrefabs:
   - {fileID: 2046769919979394465, guid: 481f807330293e944a124a30bf42e36e, type: 3}
