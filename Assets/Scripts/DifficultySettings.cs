@@ -7,15 +7,14 @@ namespace LudumDare52_2
     [CreateAssetMenu(menuName = "LudumDare52/Difficulty Settings", fileName = "DifficultySettings", order = 0)]
     public class DifficultySettings : ScriptableObject
     {
-        [SerializeField] private int maxLives;
+        private int maxLives = 3;
         [SerializeField] private int levelLength = 20;
         [SerializeField] private float tractorMoveSpeed = 0.5f;
-        [SerializeField] private float tractorDamageCooldown = 3f;
+        private float tractorDamageCooldown = 1.5f;
         [SerializeField] private float generalSpawnChance = 0.5f;
         [SerializeField] private float obstacleSpawnChance = 0.25f;
         [SerializeField] private int maxObstaclesPerCol = 3;
-        [SerializeField] private int maxObstaclesPer3Cols = 5;
-        [SerializeField] private int colsBeforeObstacles = 4;
+        private int colsBeforeObstacles = 4;
         [SerializeField] private int maxColsWithoutObstacles = 3;
         [SerializeField] private List<float> wordListWeights;
         
@@ -34,7 +33,6 @@ namespace LudumDare52_2
         public float GeneralSpawnChance => generalSpawnChance;
         public float ObstacleSpawnChance => obstacleSpawnChance;
         public int MaxObstaclesPerCol => maxObstaclesPerCol;
-        public int MaxObstaclesPer3Cols => maxObstaclesPer3Cols;
         public int ColsBeforeObstacles => colsBeforeObstacles;
         public int MaxColsWithoutObstacles => maxColsWithoutObstacles;
         public List<float> WordListWeights => wordListWeights;

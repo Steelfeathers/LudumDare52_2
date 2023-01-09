@@ -447,6 +447,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ca3920c07c6a6ee428ef4ca91e3348cc, type: 2}
   - {fileID: 11400000, guid: a1f925fb12c7d724fa7ebc11ff9158aa, type: 2}
   - {fileID: 11400000, guid: f2babfdf393d716428994ff0613d5a8c, type: 2}
+  - {fileID: 11400000, guid: 99c220884709d3144895616df10b6ac8, type: 2}
+  - {fileID: 11400000, guid: cd88d3928fbb2b6419aa5556a7109170, type: 2}
   CurLevel: 0
   CurScore: 0
 --- !u!1 &991092678

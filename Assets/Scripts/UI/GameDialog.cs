@@ -17,24 +17,32 @@ namespace LudumDare52_2
     {
         public static readonly string[] THREE_LETTER_WORDS =
         {
-            "hoe", "dig", "cow", "cat", "dog", "pig", "sun", "hay", "row", "sow", "ewe", "ram", "pea", "tea", "hen"
+            "hoe", "dig", "cow", "cat", "dog", "pig", "sun", "hay", "row", "sow", "ewe", "ram", "pea", "tea", "hen", "bee", "egg",
+            "hog", "rye", "oat"
         };
         public static readonly string[] FOUR_LETTER_WORDS =
         {
-            "crop", "farm", "seed", "barn", "rain", "plant", "calf", "foal", "mare", "bull", "rose", "taro", "wild", "okra", "lily", "root", "rice", "clay", "silt", "corn", "soil", "till",
-            "hemp", "pear", "bush", "tree", "iris", "beet", "grow"
+            "crop", "farm", "seed", "barn", "rain", "plant", "calf", "foal", "mare", "bull", "rose", "taro", "wild", "okra", "lily", 
+            "root", "rice", "clay", "silt", "corn", "soil", "till", "hemp", "pear", "bush", "tree", "iris", "beet", "grow", "milk",
+            "goat", "weed", "plow", "acre", "wasp", "coop", "crow", "duck", "food", "gate", "lamb", "land", "mule", "oats", "pail",
+            "plow", "pick", "ripe", "rake", "reap", "silo", "tend"
         };
         public static readonly string[] FIVE_LETTER_WORDS =
         {
-            "tulip", "fence", "horse", "sheep", "plant", "steer", "wagon", "basil", "wheat", "poppy", "chard", "onion", "daisy", "water", "berry", "apple", "melon", "thyme", "grape", "chick"
+            "tulip", "fence", "horse", "sheep", "plant", "steer", "wagon", "basil", "wheat", "poppy", "chard", "onion", "daisy", "water", 
+            "berry", "apple", "melon", "thyme", "grape", "chick", "bread", "llama", "beans", "breed", "dairy", "field", "flock", "fruit",
+            "goose", "geese", "grain", "honey", "mower", "mulch", "ranch", "roost", "swine", "udder"
         };
         public static readonly string[] SIX_LETTER_WORDS =
         {
-            "potato", "tomato", "shovel", "harness", "pepper", "cherry", "radish", "coffee", "turnip", "squash", "barley", "cactus", "carrot", "garlic", "cotton", "growth"
+            "potato", "tomato", "shovel", "harness", "pepper", "cherry", "radish", "coffee", "turnip", "squash", "barley", "cactus", 
+            "carrot", "garlic", "cotton", "growth", "scythe", "piglet", "animal", "bucket", "cattle", "donkey", "fallow", "farmer",
+            "gander", "grains", "meadow", "rabbit", "shears", "sickle", "stable", "turkey", "trough", "tiller", "trowl"
         };
         public static readonly string[] SEVEN_LETTER_WORDS =
         {
-            "soybean", "tomato", "harvest", "tractor", "rooster", "lettuce", "pumpkin", "cabbage", "drought"
+            "soybean", "tomato", "harvest", "tractor", "rooster", "lettuce", "pumpkin", "cabbage", "drought", "beehive", "chicken",
+            "combine", "orchard", "poultry", "pasture", "produce"
         }; 
     }
 

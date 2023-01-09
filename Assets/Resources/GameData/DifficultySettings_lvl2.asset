@@ -12,22 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6562f44746953c419d2bd091c2ecd66, type: 3}
   m_Name: DifficultySettings_lvl2
   m_EditorClassIdentifier: 
-  maxLives: 3
   levelLength: 40
-  tractorMoveSpeed: 2.5
-  tractorDamageCooldown: 1.5
-  generalSpawnChance: 0.95
-  obstacleSpawnChance: 0.3
-  maxObstaclesPerCol: 3
-  maxObstaclesPer3Cols: 5
-  colsBeforeObstacles: 4
-  maxColsWithoutObstacles: 3
+  tractorMoveSpeed: 1.9
+  generalSpawnChance: 0.9
+  obstacleSpawnChance: 0.23
+  maxObstaclesPerCol: 1
+  maxColsWithoutObstacles: 2
   wordListWeights:
-  - 3
-  - 4
-  - 4
-  - 3
   - 2
+  - 3
+  - 4
+  - 2
+  - 1
   cropPrefabs:
   - {fileID: 5448868706150218653, guid: 86147cad74d36294cae4d5c1eda38d91, type: 3}
   - {fileID: 5448868706150218653, guid: 6cd5f2c2bf7152e429cc1c9a207dd187, type: 3}
