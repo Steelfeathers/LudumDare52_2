@@ -127,7 +127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.4901961, g: 0.40000004, b: 0.32156864, a: 1}
+  m_Color: {r: 0.77647066, g: 0.45098042, b: 0.41960788, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -314,6 +314,18 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 2308540687407906506, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6117647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308540687407906506, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308540687407906506, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.95294124
+      objectReference: {fileID: 0}
     - target: {fileID: 2342823407257010478, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -410,6 +422,18 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 38
       objectReference: {fileID: 0}
+    - target: {fileID: 7916229086224939619, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916229086224939619, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916229086224939619, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8941177
+      objectReference: {fileID: 0}
     - target: {fileID: 8860151050345638955, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
       propertyPath: m_Name
       value: ExitButton
@@ -455,6 +479,18 @@ PrefabInstance:
     - target: {fileID: 920493364082028975, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308540687407906506, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6117647
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308540687407906506, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7960785
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308540687407906506, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.95294124
       objectReference: {fileID: 0}
     - target: {fileID: 2342823407257010478, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
       propertyPath: m_Pivot.x
@@ -552,6 +588,18 @@ PrefabInstance:
       propertyPath: m_fontSizeBase
       value: 38
       objectReference: {fileID: 0}
+    - target: {fileID: 7916229086224939619, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916229086224939619, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.6313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916229086224939619, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.8941177
+      objectReference: {fileID: 0}
     - target: {fileID: 8860151050345638955, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
       propertyPath: m_Name
       value: TutorialButton
@@ -597,6 +645,18 @@ PrefabInstance:
     - target: {fileID: 920493364082028975, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308540687407906506, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.5058824
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308540687407906506, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.8313726
+      objectReference: {fileID: 0}
+    - target: {fileID: 2308540687407906506, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.69803923
       objectReference: {fileID: 0}
     - target: {fileID: 2342823407257010478, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
       propertyPath: m_Pivot.x
@@ -693,6 +753,18 @@ PrefabInstance:
     - target: {fileID: 7654413028491496678, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
       propertyPath: m_fontSizeBase
       value: 38
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916229086224939619, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.b
+      value: 0.47450984
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916229086224939619, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.g
+      value: 0.7254902
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916229086224939619, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
+      propertyPath: m_Color.r
+      value: 0.5058824
       objectReference: {fileID: 0}
     - target: {fileID: 8860151050345638955, guid: b96d2ef5b6bb2744b9a12631e2b4697f, type: 3}
       propertyPath: m_Name
