@@ -18,5 +18,10 @@ namespace LudumDare52_2
         {
             Utils.QuitApplication();
         }
+
+        public void OnTutorialClicked()
+        {
+            UIManager.Instance.ShowOverlayDialog(MyGameRoot.Instance.TutorialPrefab);
+        }
     }
 }

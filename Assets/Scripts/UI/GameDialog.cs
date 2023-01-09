@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using FirebirdGames.Utilities;
 using FirebirdGames.Utilities.UI;
 using TMPro;
@@ -46,6 +47,7 @@ namespace LudumDare52_2
         [SerializeField] private LifeWidget lifeWidgetPrefab;
 
         [Header("Field")] 
+        [SerializeField] private ParticleSystem tractorSmokeFX;
         [SerializeField] private Transform tractorHolder;
         [SerializeField] private RectTransform pickupTrigger;
         [SerializeField] private RectTransform endLevelTrigger;
@@ -53,7 +55,6 @@ namespace LudumDare52_2
         [SerializeField] private Transform cropRowsHolder;
         [SerializeField] private GameObject cropSlotPrefab;
         [SerializeField] private List<Transform> cropRows;
-        //[SerializeField] private List<Transform> cropRowSlots;
 
         private List<LifeWidget> lifeWidgets = new List<LifeWidget>();
       
@@ -76,9 +77,11 @@ namespace LudumDare52_2
         private bool isGameOver;
         private bool isVictory;
         private bool isPaused;
-        
-        private void Start()
+
+        public override void Initialize(object config = null, Action onClosedCallback = null)
         {
+            base.Initialize(config, onClosedCallback);
+            
             inputField.ActivateInputField();
 
             wordArrayList = new List<string[]>()
@@ -89,6 +92,12 @@ namespace LudumDare52_2
             };
 
             SetupLevel(); 
+        }
+
+        public override void AnimateInComplete()
+        {
+            base.AnimateInComplete();
+            AnimUtils.PlayAllChildTweensWithID(tractorHolder.gameObject, "Idle");
         }
 
         public void SetupLevel()
@@ -290,7 +299,6 @@ namespace LudumDare52_2
                     if (tractorDamagedTimer > 0) //tractor stalled, don't harvest crop
                     {
                         crop.WasHarvested = true;
-                        //crop.PlayDestroyedFX();
                     }
                     else
                     {
@@ -356,12 +364,17 @@ namespace LudumDare52_2
         
         private void PlayTractorDamagedFX()
         {
-            
+            tractorSmokeFX.gameObject.SetActive(true);
+            tractorSmokeFX.Play();
+            AnimUtils.KillAllChildTweensWithID(tractorHolder.gameObject, "Idle");
+            AnimUtils.PlayAllChildTweensWithID(tractorHolder.gameObject, "Damaged");
         }
 
         private void PlayTractorFixedFX()
         {
-            //TODO: play fx
+            AnimUtils.KillAllChildTweensWithID(tractorHolder.gameObject, "Damaged");
+            AnimUtils.PlayAllChildTweensWithID(tractorHolder.gameObject, "Idle");
+            tractorSmokeFX.Stop();
         }
 
 

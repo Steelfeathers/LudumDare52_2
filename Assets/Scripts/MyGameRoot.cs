@@ -13,6 +13,7 @@ namespace LudumDare52_2
         [SerializeField] private Dialog gameVictoryDialogPrefab;
         [SerializeField] private Dialog gameLossDialogPrefab;
         [SerializeField] private Dialog tutorialPrefab;
+        public Dialog TutorialPrefab => tutorialPrefab;
 
         [SerializeField] private List<DifficultySettings> levelDifficultySettings;
         public List<DifficultySettings> LevelDifficultySettings => levelDifficultySettings;

@@ -19,18 +19,12 @@ namespace LudumDare52_2
         {
             harvestFXTest.text = $"+{pointValue}";
             harvestFXTest.gameObject.SetActive(true);
+           // AnimUtils.PlayAllChildTweensWithID(gameObject, "Harvested");
             DOTween.Sequence().AppendInterval(AnimUtils.PlayAllChildTweensWithID(gameObject, "Harvested")).AppendCallback(() =>
             {
                 if (this != null && gameObject != null) gameObject.SetActive(false);
             });
         }
 
-        public void PlayDestroyedFX()
-        {
-            DOTween.Sequence().AppendInterval(AnimUtils.PlayAllChildTweensWithID(gameObject, "Destroyed")).AppendCallback(() =>
-            {
-                if (this != null && gameObject != null) gameObject.SetActive(false);
-            });
-        }
     }
 }
