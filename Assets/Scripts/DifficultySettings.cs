@@ -14,6 +14,9 @@ namespace LudumDare52_2
         [SerializeField] private float generalSpawnChance = 0.5f;
         [SerializeField] private float obstacleSpawnChance = 0.25f;
         [SerializeField] private int maxObstaclesPerCol = 3;
+        [SerializeField] private int maxObstaclesPer3Cols = 5;
+        [SerializeField] private int colsBeforeObstacles = 4;
+        [SerializeField] private int maxColsWithoutObstacles = 3;
         [SerializeField] private List<float> wordListWeights;
         
         [Space] [Header("Crops")] 
@@ -31,6 +34,9 @@ namespace LudumDare52_2
         public float GeneralSpawnChance => generalSpawnChance;
         public float ObstacleSpawnChance => obstacleSpawnChance;
         public int MaxObstaclesPerCol => maxObstaclesPerCol;
+        public int MaxObstaclesPer3Cols => maxObstaclesPer3Cols;
+        public int ColsBeforeObstacles => colsBeforeObstacles;
+        public int MaxColsWithoutObstacles => maxColsWithoutObstacles;
         public List<float> WordListWeights => wordListWeights;
         public List<Crop> CropPrefabs => cropPrefabs;
         public List<float> CropPrefabWeights => cropPrefabWeights;

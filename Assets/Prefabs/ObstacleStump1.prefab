@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8522897964575119764, guid: c89a7447ec1ef224e87b60d0efa058e3, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -42.8
+      objectReference: {fileID: 0}
     - target: {fileID: 9206226368588432722, guid: c89a7447ec1ef224e87b60d0efa058e3, type: 3}
       propertyPath: m_Name
       value: ObstacleStump1

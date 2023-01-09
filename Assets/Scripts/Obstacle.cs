@@ -12,18 +12,22 @@ namespace LudumDare52_2
     {
         [SerializeField] private TextMeshProUGUI myWordText;
         [SerializeField] private Color progressColor;
+        [SerializeField] private ParticleSystem sparksFX;
+        [SerializeField] private ParticleSystem sparksFX2;
+        [SerializeField] private ParticleSystem deathFX;
+        [SerializeField] private ParticleSystem ouchFX;
 
         public string MyWord => myWord;
         private string myWord;
         private string progressColorHexCode;
 
-        public bool WasRemoved;
+        [HideInInspector] public bool WasRemoved;
 
         public void Setup(string word)
         {
             myWord = word;
             progressColorHexCode = progressColor.ToHexString();
-            myWordText.text = myWord;
+            myWordText.SetText(myWord);
         }
 
         public void UpdateProgress(int charCount)
@@ -42,30 +46,47 @@ namespace LudumDare52_2
                     textStr += charArray[i];
                 }
             }
-            myWordText.text = textStr;
+            //Debug.Log("Updating text for: " + myWord);
+            myWordText.SetText(textStr);
+            AnimUtils.PlayAllChildTweensWithID(gameObject, "Damaged");
         }
 
         public void ClearProgress()
         {
-            myWordText.text = myWord;
+            myWordText.SetText(myWord);
         }
 
         public void PlayRemoveFX()
         {
-            DOTween.Sequence().AppendInterval(AnimUtils.PlayAllChildTweensWithID(gameObject, "Removed")).AppendCallback(() =>
+            sparksFX.gameObject.SetActive(true);
+            deathFX.gameObject.SetActive(true);
+            sparksFX.Play();
+            deathFX.Play();
+            AnimUtils.PlayAllChildTweensWithID(gameObject, "Removed");
+            DOTween.Sequence().AppendInterval(3).AppendCallback(() =>
             {
-                if (this != null && gameObject != null) gameObject.SetActive(false);
+                if (this != null && gameObject != null)
+                {
+                    gameObject.SetActive(false);
+                }
             });
-            //TODO FX
         }
 
         public void PlayDestroyedFX()
         {
-            DOTween.Sequence().AppendInterval(AnimUtils.PlayAllChildTweensWithID(gameObject, "Destroyed")).AppendCallback(() =>
+            sparksFX2.gameObject.SetActive(true);
+            ouchFX.gameObject.SetActive(true);
+            sparksFX2.Play();
+            ouchFX.Play();
+            AnimUtils.PlayAllChildTweensWithID(gameObject, "Removed");
+            DOTween.Sequence().AppendInterval(3).AppendCallback(() =>
             {
-                if (this != null && gameObject != null) gameObject.SetActive(false);
+                if (this != null && gameObject != null)
+                {
+                    gameObject.SetActive(false);
+                }
             });
-            //TODO: FX
+            
         }
     }
 }

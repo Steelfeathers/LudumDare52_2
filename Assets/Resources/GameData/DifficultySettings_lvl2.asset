@@ -13,10 +13,14 @@ MonoBehaviour:
   m_Name: DifficultySettings_lvl2
   m_EditorClassIdentifier: 
   maxLives: 3
-  tractorMoveSpeed: 2
+  levelLength: 40
+  tractorMoveSpeed: 2.5
   tractorDamageCooldown: 1.5
-  obstacleSpawnChance: 0.25
-  maxObstaclesOnScreen: 5
+  generalSpawnChance: 0.95
+  obstacleSpawnChance: 0.3
+  maxObstaclesPerCol: 3
+  colsBeforeObstacles: 4
+  maxColsWithoutObstacles: 3
   wordListWeights:
   - 3
   - 4

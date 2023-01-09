@@ -49,6 +49,7 @@ namespace LudumDare52_2
         [SerializeField] private Transform tractorHolder;
         [SerializeField] private RectTransform pickupTrigger;
         [SerializeField] private RectTransform endLevelTrigger;
+        [SerializeField] private RectTransform showEndDialogTrigger;
         [SerializeField] private Transform cropRowsHolder;
         [SerializeField] private GameObject cropSlotPrefab;
         [SerializeField] private List<Transform> cropRows;
@@ -74,7 +75,6 @@ namespace LudumDare52_2
         private bool isDone;
         private bool isGameOver;
         private bool isVictory;
-        private float victoryTimer;
         private bool isPaused;
         
         private void Start()
@@ -108,10 +108,15 @@ namespace LudumDare52_2
             MyGameRoot.Instance.CurScore = 0;
             UpdateScore();
 
-            int obstColCount = 0;
+            int obstaclesInCol = 0;
+            int colsWithoutObstacles = 0;
+            bool spawnedObstacleInThisCol = false;
             for (int x = 0; x < curLevelSettings.LevelLength; x++) //down first, then across, in 'waves'
             {
-                obstColCount = 0;
+                if (!spawnedObstacleInThisCol) colsWithoutObstacles += 1;
+                spawnedObstacleInThisCol = false;
+                obstaclesInCol = 0;
+                
                 for (int y = 0; y < cropRows.Count; y++)
                 {
                     var slot = GameObject.Instantiate(cropSlotPrefab, cropRows[y]); //spawn placeholder to make sure everything sizes correctly
@@ -125,12 +130,17 @@ namespace LudumDare52_2
                         float calcedSpawnChance = obstLeft || obstUp
                             ? curLevelSettings.ObstacleSpawnChance * 0.5f
                             : curLevelSettings.ObstacleSpawnChance;
-                        
-                        //spawn obstacle
-                        if (obstColCount < curLevelSettings.MaxObstaclesPerCol && Random.Range(0f, 1f) < calcedSpawnChance)
+
+                        if (colsWithoutObstacles > curLevelSettings.MaxColsWithoutObstacles)
                         {
-                            var wordList = wordArrayList.GetWeightedRandom(curLevelSettings.WordListWeights)
-                                .ToList();
+                            float t = (float)(colsWithoutObstacles - curLevelSettings.MaxColsWithoutObstacles);// / (float)curLevelSettings.MaxColsWithoutObstacles;
+                            calcedSpawnChance += t * 0.33f; //= Mathf.Lerp(calcedSpawnChance, 1f, t);
+                        }
+
+                        //spawn obstacle
+                        if (x > curLevelSettings.ColsBeforeObstacles && obstaclesInCol < curLevelSettings.MaxObstaclesPerCol && Random.Range(0f, 1f) < calcedSpawnChance)
+                        {
+                            var wordList = wordArrayList.GetWeightedRandom(curLevelSettings.WordListWeights).ToList();
 
                             var obstaclePrefab = curLevelSettings.ObstaclePrefabs.GetWeightedRandom(curLevelSettings.ObstaclePrefabWeights);
                             var obstacle = GameObject.Instantiate(obstaclePrefab.gameObject, slot.transform).GetComponent<Obstacle>();
@@ -138,7 +148,9 @@ namespace LudumDare52_2
                             obstacles.Add(obstacle);
 
                             obstacleGridPositions.Add(new Vector2(x, y));
-                            obstColCount += 1;
+                            obstaclesInCol += 1;
+                            spawnedObstacleInThisCol = true;
+                            colsWithoutObstacles = 0;
                         }
                         //spawn crop
                         else
@@ -190,7 +202,7 @@ namespace LudumDare52_2
                     
                     if (string.Equals(obstacle.MyWord[..curInput.Length], curInput, StringComparison.OrdinalIgnoreCase))
                     {
-                        float dist = Mathf.Abs(pickupTrigger.position.y - obstacle.gameObject.transform.position.y);
+                        float dist = Mathf.Abs(pickupTrigger.position.x - obstacle.gameObject.transform.position.x);
                         if (dist < minDist)
                         {
                             minDist = dist;
@@ -243,18 +255,14 @@ namespace LudumDare52_2
             //On victory, keep plowing until the end of the row
             if (isGameOver && isVictory)
             {
-                if (victoryTimer >= 0)
+                if (Utils.RectOverlaps(pickupTrigger, showEndDialogTrigger))
                 {
-                    victoryTimer -= Time.deltaTime;
-                    if (victoryTimer <= 0)
-                    {
-                        isDone = true;
-                        UIManager.Instance.ShowOverlayDialog(MyGameRoot.Instance.GameVictoryDialogPrefab);
-                    }
-                    else
-                    {
-                        tractorHolder.transform.position = new Vector3(tractorHolder.transform.position.x + (Time.deltaTime * curLevelSettings.TractorMoveSpeed), tractorHolder.transform.position.y, tractorHolder.transform.position.z);
-                    }
+                    isDone = true;
+                    //UIManager.Instance.ShowOverlayDialog(MyGameRoot.Instance.GameVictoryDialogPrefab);
+                }
+                else
+                {
+                    tractorHolder.transform.position = new Vector3(tractorHolder.transform.position.x + (Time.deltaTime * curLevelSettings.TractorMoveSpeed), tractorHolder.transform.position.y, tractorHolder.transform.position.z);
                 }
                 return;
             }
@@ -282,7 +290,7 @@ namespace LudumDare52_2
                     if (tractorDamagedTimer > 0) //tractor stalled, don't harvest crop
                     {
                         crop.WasHarvested = true;
-                        crop.PlayDestroyedFX();
+                        //crop.PlayDestroyedFX();
                     }
                     else
                     {
@@ -298,6 +306,7 @@ namespace LudumDare52_2
                 if (obstacle.WasRemoved) continue;
                 if (Utils.RectOverlaps(obstacle.gameObject.RectTransform(), pickupTrigger))
                 {
+                    tractorDamagedTimer = curLevelSettings.TractorDamageCooldown;
                     LoseLife();
                     PlayTractorDamagedFX();
                     obstacle.WasRemoved = true;
@@ -324,7 +333,7 @@ namespace LudumDare52_2
 
             if (curLives <= 0)
             {
-                EndGame(false);
+                //EndGame(false);
             }
         }
 
@@ -335,8 +344,8 @@ namespace LudumDare52_2
             inputField.enabled = false;
 
             if (victory)
-            {
-                victoryTimer = 3f;
+            { 
+                UIManager.Instance.ShowOverlayDialog(MyGameRoot.Instance.GameVictoryDialogPrefab);
             }
             else
             {

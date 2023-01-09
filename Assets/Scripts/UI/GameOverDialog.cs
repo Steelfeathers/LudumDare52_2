@@ -17,7 +17,7 @@ namespace LudumDare52_2
         {
             base.Initialize(config, onClosedCallback);
             scoreText.text = $"Final Score: {MyGameRoot.Instance.CurScore}";
-            levelText.text = $"Level {MyGameRoot.Instance.CurLevel}";
+            levelText.text = $"Level {MyGameRoot.Instance.CurLevel + 1}";
             
             if (nextLevelButton != null && MyGameRoot.Instance.CurLevel >= MyGameRoot.Instance.MaxLevel)
                 nextLevelButton.SetActive(false);
@@ -26,17 +26,20 @@ namespace LudumDare52_2
         public void OnReturnToMenu()
         {
             MyGameRoot.Instance.LoadMenu();
+            OnCloseClicked();
         }
 
         public void OnRetry()
         {
             MyGameRoot.Instance.LoadGame();
+            OnCloseClicked();
         }
 
         public void OnNextLevel()
         {
             MyGameRoot.Instance.CurLevel += 1;
             MyGameRoot.Instance.LoadGame();
+            OnCloseClicked();
         }
     }
 }
